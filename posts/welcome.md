@@ -2,6 +2,7 @@
 title: "블로그"
 date: "2025-12-20"
 description: "Be:Long Tech의 시작을 알리는 첫 번째 글입니다."
+coverImage: "/images/cover.jpg"
 slug: "welcome"
 ---
 
