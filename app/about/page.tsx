@@ -1,15 +1,13 @@
-"use client"; // 필수!
+"use client";
 
 import Image from 'next/image';
-import { Github, Mail, Terminal, Server, Code2, Database } from 'lucide-react';
-import { useLanguage } from '@/context/LanguageContext'; // 훅 가져오기
+import { Github, Mail, Terminal, Server, Database } from 'lucide-react';
+import { useLanguage } from '@/context/LanguageContext';
 
-// 기술 스택은 언어와 상관없이 영어로 쓰는 경우가 많아 그대로 두거나, 필요하면 dictionary로 옮길 수 있습니다.
+// 기술 스택 (리눅스, 쉘 스크립트 추가 완료)
 const techStack = {
-    Infrastructure: ["Kubernetes", "AWS", "Terraform", "Docker", "ArgoCD", "Prometheus"],
-    Backend: ["Go (Golang)", "Python", "FastAPI", "Django", "gRPC"],
-    Frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    "AI/ML Engineering": ["LLM Serving (vLLM, TGI)", "MLOps Pipelines (Kubeflow)", "LangChain", "Hugging Face"],
+    Infrastructure: ["Kubernetes", "AWS", "Docker", "Linux", "Shell Script", "Prometheus"],
+    Backend: ["Python"],
 };
 
 function TechBadge({ name }: { name: string }) {
@@ -21,7 +19,7 @@ function TechBadge({ name }: { name: string }) {
 }
 
 export default function About() {
-    const { t } = useLanguage(); // 번역기 사용
+    const { t } = useLanguage();
 
     return (
         <div className="min-h-screen bg-black text-white p-8 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -37,7 +35,6 @@ export default function About() {
 
                     <div className="text-center md:text-left">
                         <h1 className="text-4xl sm:text-5xl font-bold tracking-tighter mb-6">
-                            {/* 사전에서 가져온 제목 */}
                             {t.about.title}
                         </h1>
                         <div className="space-y-4 text-gray-400 text-lg leading-relaxed">
@@ -46,7 +43,6 @@ export default function About() {
                             <p>{t.about.desc2}</p>
                         </div>
 
-                        {/* 연락처 아이콘 등은 그대로... */}
                         <div className="flex gap-6 justify-center md:justify-start mt-8">
                             <a href="https://github.com/LongKim88" target="_blank" className="group flex items-center gap-2 text-gray-400 hover:text-white transition-colors">
                                 <Github className="w-5 h-5" /> <span className="font-medium">GitHub</span>
@@ -64,21 +60,29 @@ export default function About() {
                         <Terminal className="w-8 h-8 text-blue-500" />
                         Tech Stack & Expertise
                     </h2>
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                        {/* Infrastructure (Linux, Shell Script 포함) */}
                         <div>
-                            {/* 사전에서 가져온 소제목 */}
                             <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-200">
                                 <Server className="w-5 h-5 text-gray-400" /> {t.about.tech_infra}
                             </h3>
-                            <div className="flex flex-wrap gap-2">{techStack.Infrastructure.map(tech => <TechBadge key={tech} name={tech} />)}</div>
+                            <div className="flex flex-wrap gap-2">
+                                {techStack.Infrastructure.map(tech => <TechBadge key={tech} name={tech} />)}
+                            </div>
                         </div>
+
+                        {/* Backend */}
                         <div>
                             <h3 className="text-xl font-semibold mb-4 flex items-center gap-2 text-gray-200">
-                                <Database className="w-5 h-5 text-gray-400" /> {t.about.tech_ai}
+                                <Database className="w-5 h-5 text-gray-400" /> {t.about.tech_back}
                             </h3>
-                            <div className="flex flex-wrap gap-2">{techStack["AI/ML Engineering"].map(tech => <TechBadge key={tech} name={tech} />)}</div>
+                            <div className="flex flex-wrap gap-2">
+                                {techStack.Backend.map(tech => <TechBadge key={tech} name={tech} />)}
+                            </div>
                         </div>
-                        {/* ... 나머지 부분도 t.about.tech_back 등으로 변경 가능 ... */}
+
                     </div>
                 </section>
 
